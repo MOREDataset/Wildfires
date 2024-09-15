@@ -1,6 +1,6 @@
 # Wildfires
 This repository contains the data, code, and metadata for the research project "Alaskan Wildfire Prediction using Geospatial Features and Machine Learning."
-![Proposed approach for Wildfire occurrence and behavior prediction in Alaska](Cenceptual_Diagram_Fires.jpg)
+![The proposed framework for Wildfire occurrence and behavior prediction in Alaska](Cenceptual_Diagram_Fires.jpg "The proposed framework for Wildfire occurrence and behavior prediction in Alaska")
 
 ## Repository Structure
 - `Data/` - Contains the datasets used in the study as well as the proposed model predictions, including:
