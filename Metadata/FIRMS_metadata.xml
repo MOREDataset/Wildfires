@@ -1,0 +1,156 @@
+<metadata>
+  <!-- Identification Information -->
+  <identificationInfo>
+    <citation>
+      <title>NASA FIRMS Wildfire Data</title>
+    </citation>
+    <abstract>
+      This dataset contains geospatial, temporal, and atmospheric information on wildfire events detected by the NASA FIRMS project. Data includes details on latitude, longitude, brightness, fire radiative power (FRP), satellite source, confidence level, and day/night detection indicators.
+    </abstract>
+    <purpose>
+      To provide near real-time/archival geospatial data on wildfire activity to support research, risk assessment, and wildfire impact management in Alaska and surrounding regions.
+    </purpose>
+    <status>completed</status>
+    <language>eng</language>
+    <topicCategory>environment</topicCategory>
+  </identificationInfo>
+
+  <!-- Contact Information -->
+  <contact>
+    <responsibleParty>
+      <organisationName>NASA FIRMS</organisationName>
+      <contactInfo>
+        <address>
+          <electronicMailAddress>support@firms.nasa.gov</electronicMailAddress>
+        </address>
+      </contactInfo>
+      <role>originator</role>
+    </responsibleParty>
+  </contact>
+
+  <!-- Spatial Information -->
+  <spatialRepresentationInfo>
+    <spatialReferenceSystem>
+      <referenceSystemIdentifier>
+        <code>EPSG:4326</code>
+        <codeSpace>WGS84</codeSpace>
+      </referenceSystemIdentifier>
+    </spatialReferenceSystem>
+    <extent>
+      <boundingBox>
+        <westBoundLongitude>-179</westBoundLongitude>
+        <eastBoundLongitude>-129</eastBoundLongitude>
+        <southBoundLatitude>51</southBoundLatitude>
+        <northBoundLatitude>71</northBoundLatitude>
+      </boundingBox>
+    </extent>
+  </spatialRepresentationInfo>
+
+  <!-- Temporal Information -->
+  <temporalElement>
+    <extent>
+      <begin>2000-01-01</begin>
+      <end>2022-12-31</end>
+    </extent>
+  </temporalElement>
+
+  <!-- Content Information -->
+  <contentInfo>
+    <!-- Latitude -->
+    <attribute>
+      <name>latitude</name>
+      <definition>Latitude of the detected fire event</definition>
+      <units>degrees</units>
+    </attribute>
+
+    <!-- Longitude -->
+    <attribute>
+      <name>longitude</name>
+      <definition>Longitude of the detected fire event</definition>
+      <units>degrees</units>
+    </attribute>
+
+    <!-- Brightness -->
+    <attribute>
+      <name>brightness</name>
+      <definition>
+        Radiance measured by the satellite in Kelvin (K) at the center of the fire pixel. Indicates the temperature of the fire, with higher values typically corresponding to hotter fires.
+      </definition>
+      <units>Kelvin (K)</units>
+    </attribute>
+
+    <!-- Fire Radiative Power (FRP) -->
+    <attribute>
+      <name>FRP</name>
+      <definition>
+        Fire Radiative Power (FRP) is a measure of the radiative energy released by the fire in Megawatts (MW). It provides an estimate of the fire's intensity and can be used to assess biomass burning rates and carbon emissions.
+      </definition>
+      <units>Megawatts (MW)</units>
+    </attribute>
+
+    <!-- Satellite -->
+    <attribute>
+      <name>satellite</name>
+      <definition>
+        Name of the satellite used for detection. Indicates whether the fire detection was made by the MODIS instrument aboard the Terra or Aqua satellites, or by the VIIRS instrument aboard the Suomi NPP or NOAA-20 satellites.
+      </definition>
+      <dataType>String</dataType>
+      <values>MODIS-Terra, MODIS-Aqua, VIIRS-Suomi NPP, VIIRS-NOAA-20</values>
+    </attribute>
+
+    <!-- Confidence -->
+    <attribute>
+      <name>confidence</name>
+      <definition>
+        Confidence level of the fire detection, indicating the likelihood that the detected hotspot corresponds to an actual fire event. Expressed as a percentage ranging from 0 to 100, with higher values indicating greater confidence in the detection.
+      </definition>
+      <units>Percentage (%)</units>
+      <values>0-100</values>
+    </attribute>
+
+    <!-- Day/Night Indicator -->
+    <attribute>
+      <name>day-night</name>
+      <definition>
+        Indicates whether the fire detection was made during the day or at night. This binary classification helps understand detection conditions and the potential impact of solar radiation on the fire detection process.
+      </definition>
+      <dataType>String</dataType>
+      <values>Day, Night</values>
+    </attribute>
+  </contentInfo>
+
+  <!-- Data Quality Information -->
+  <dataQualityInfo>
+    <lineage>
+      <statement>
+        Data filtered to include only fire events within the Alaska state. This dataset utilizes archival data collected by MODIS and VIIRS sensors on NASA satellites, ensuring accuracy and reliability of fire event detections.
+      </statement>
+    </lineage>
+  </dataQualityInfo>
+
+  <!-- Distribution Information -->
+  <distributionInfo>
+    <distributionFormat>
+      <name>CSV</name>
+    </distributionFormat>
+    <transferOptions>
+      <onlineResource>
+        <linkage>https://github.com/MOREDataset/Wildfires</linkage>
+        <description>Access the FIRMS Wildfire dataset from the paper's GitHub repository.</description>
+      </onlineResource>
+    </transferOptions>
+  </distributionInfo>
+
+  <!-- Metadata Information -->
+  <metadataStandard>
+    <name>ISO 19115:2003/19139</name>
+    <version>1.0</version>
+  </metadataStandard>
+  <metadataContact>
+    <responsibleParty>
+      <organisationName>NASA FIRMS Metadata Office</organisationName>
+      <electronicMailAddress>metadata@firms.nasa.gov</electronicMailAddress>
+    </responsibleParty>
+  </metadataContact>
+  <metadataDate>2024-09-15</metadataDate>
+</metadata>
