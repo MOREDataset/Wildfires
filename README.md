@@ -7,6 +7,7 @@ This repository contains the data, code, and metadata for the research project "
   - `Fire_archive_AlaskaOnly.csv` - Alaska filtered NASA FIRMS wildfire data.
   - `InterAgencyFirePerimeterHistory_All_Years_View.shp` - Shapefile of historical fire perimeters (due to space limitations, please download from: https://data-nifc.opendata.arcgis.com/datasets/nifc::interagencyfireperimeterhistory-all-years-view/about).
 - `Code/` - Contains Python and MATLAB scripts for data acquisition, preprocessing, analysis, and visualization.
+- `Maps/` - Contains GEOTIFF files of all the maps used in the manuscript.
 - `Metadata/` - Contains metadata file adhering to USGS and ISO-compliant standards.
 - `README.md` - Overview and instructions for using the repository.
 - `LICENSE` - License information for the repository.
