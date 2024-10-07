@@ -1,3 +1,62 @@
+%% Spatial Overlay Analysis
+clear
+clc
+% Load FIRMS dataset
+path1 = fullfile('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork',"Fire_archive_AlaskaOnly.csv");
+opts = detectImportOptions(path1);
+FIRMS = readtable(path1, opts);
+
+% Load historical fire perimeter data
+shapefilePath = 'C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\InterAgencyFirePerimeterHistory_All_Years_View\InterAgencyFirePerimeterHistory_All_Years_View.shp';
+HistoricalFires = readgeotable(shapefilePath);
+
+% Convert geopolyshape to a regular table with latitude and longitude
+HistoricalFiresTable = geotable2table(HistoricalFires, ["Lat", "Lon"]);
+
+% Filter relevant years
+HistoricalFiresTable = HistoricalFiresTable(str2double(HistoricalFiresTable.FIRE_YEAR) > 1999 & str2double(HistoricalFiresTable.FIRE_YEAR) < 2030, :);
+
+% Convert FIRMS points to geographic coordinates
+FIRMS_LatLon = [FIRMS.latitude, FIRMS.longitude];
+
+% Initialize variable to count points within any polygon
+inPolygonCount = 0;
+
+% Loop through each polygon in the historical fire data
+for i = 1:height(HistoricalFiresTable)
+    % Extract the latitude and longitude vertices
+    latVertices = HistoricalFiresTable.Lat{i};
+    lonVertices = HistoricalFiresTable.Lon{i};
+    
+    % Perform point-in-polygon test for this specific polygon
+    inPolygon = inpolygon(FIRMS_LatLon(:,2), FIRMS_LatLon(:,1), lonVertices, latVertices);
+    
+    % Count the number of points within this polygon
+    inPolygonCount = inPolygonCount + sum(inPolygon);
+end
+
+% Calculate percentage of FIRMS points within historical perimeters
+percentageWithin = (inPolygonCount / length(FIRMS_LatLon)) * 100;
+
+fprintf('Percentage of FIRMS points within historical fire perimeters: %.2f%%\n', percentageWithin);
+
+% Spatial overlap calculation
+TotalFIRMS = length(FIRMS_LatLon); % Total number of FIRMS detections
+TotalHistoricalFires = height(HistoricalFiresTable); % Total number of historical fire perimeters
+
+fprintf('Total FIRMS detections: %d\n', TotalFIRMS);
+fprintf('Total Historical Fires: %d\n', TotalHistoricalFires);
+
+% Additional metrics could include:
+% - Comparing total burned area from both datasets
+% - Number of fires detected in both datasets
+
+% Export a summary of the results
+summaryTable = table(TotalFIRMS, TotalHistoricalFires, percentageWithin);
+writetable(summaryTable, 'FIRMS_Historical_Comparison.csv');
+
+fprintf('DONE!\n');
+
 %% Validation dataset map part 1
 clear
 clc
@@ -24,6 +83,8 @@ mapcenter = get(gca,'MapCenter');
 
 % exportgraphics(gca,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Month22\Fire\Figure_RawDataset.pdf'),"ContentType","image",'BackgroundColor','none')
 fprintf('DONE!')
+
+ExportGEOTIFF(gca, 'Figure_RawDataset')
 
 %% Validation dataset map part 2
 % Let's try mapping!
@@ -58,6 +119,8 @@ set(gca,'ZoomLevel',zoomlevel,'MapCenter',mapcenter)
 % exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Month22\Fire\Figure_ValidationDataset.pdf'),"ContentType","image",'BackgroundColor','none')
 
 fprintf('DONE!')
+
+ExportGEOTIFF(gca, 'Figure_ValidationDataset')
 
 
 %% Insel
@@ -98,6 +161,8 @@ set(gca,'ZoomLevel',8.7609,'MapCenter',[66.2553 -146.4127])
 % exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Month22\Fire\Figure_ValidationInsel.pdf'),"ContentType","image")
 
 fprintf('DONE!')
+
+ExportGEOTIFF(gca, 'Figure_ValidationInsel')
 
 %% Validation of clustered events
 % Plot:
@@ -155,7 +220,9 @@ set(legend1,'Interpreter','latex','FontSize',size1,'Orientation','horizontal','L
 geolimits(latitudeLimits,longitudeLimits)
 set(gca,'ZoomLevel',8.7609,'MapCenter',[66.2553 -146.4127])
 
-exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Month22\Fire\Figure_ValidationClustersInsel.pdf'),"ContentType","image")
+% exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Month22\Fire\Figure_ValidationClustersInsel.pdf'),"ContentType","image")
+
+ExportGEOTIFF(gca, 'Figure_ValidationClustersInsel')
 
 %% extract alaska only data
 % % Define the latitude and longitude boundaries of Alaska
@@ -1872,5 +1939,40 @@ function change = randchangeLon(distKM, latitude)
             change = round(distance2lonChange(distKM,latitude),3);
         case 2
             change = -round(distance2lonChange(distKM,latitude),3);
+    end
+end
+
+
+function ExportGEOTIFF(gx, basename)
+    try % Export figure as a high-resolution JPEG
+    % basename = 'Figure_RawDataset';
+    exportgraphics(gx, [basename '.jpg'], 'Resolution', 300)
+    
+    % Define geographic reference object for world file
+    rasterSize = size(imread([basename '.jpg']));
+    [latitudeLimits,longitudeLimits] = geolimits(gx);
+    R = georefcells(latitudeLimits, longitudeLimits, rasterSize);
+    
+    % Write the world file with geographic information
+    worldfilename = getworldfilename([basename '.jpg']);
+    worldfilewrite(R, worldfilename);
+    
+    % Read the exported JPEG and world file
+    A1 = imread([basename '.jpg']);
+    R1 = worldfileread(worldfilename, 'geographic', size(A1));
+    
+    % Specify the CRS (WGS84, which is EPSG:4326) and other georeferencing information
+    geoKeyDirectoryTag.GTModelTypeGeoKey = 2; % Geographic coordinate system
+    geoKeyDirectoryTag.GTRasterTypeGeoKey = 1; % Raster pixel is area
+    geoKeyDirectoryTag.GeographicTypeGeoKey = 4326; % WGS84 EPSG code
+    
+    % Write the raster data to a GeoTIFF file
+    filename1 = [basename '.tif'];
+    geotiffwrite(filename1, A1, R1, 'GeoKeyDirectoryTag', geoKeyDirectoryTag);
+    
+    % Notify completion
+    fprintf('GeoTIFF file has been generated successfully.\n');
+    catch
+        warning('Error!')
     end
 end

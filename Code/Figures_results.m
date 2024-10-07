@@ -94,20 +94,21 @@ set(legend1,'Interpreter','latex','FontSize',size1-10);
 %%make sure to change the interpereter of the x and y axis labels manually
 %%for now :p
 
-exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\PFR_FIRMS_plot_v2.eps'),"ContentType","vector")
-
+% exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\PFR_FIRMS_plot_v2.eps'),"ContentType","vector")
+%% Run this after making the changes in the figure of the previous section
+ExportGEOTIFF(gca, 'PFR_FIRMS_plot_v2')
 
 %% wildfire occurrence prediction as figure - Task1
 clc
-size1 = 40;
+size1 = 35;
 %accuracy
 Season_naive_baseline   = [53.07	51.99	48.98	53.31];
 Location_naive_baseline	= [49.82	49.82	49.82	49.82];
 Season_Location_HGB	    = [59.81	58.60	58.12	59.33];
-LogisticRegression= [50.78	50.54	50.18	49.58];
+% LogisticRegression= [50.78	50.54	50.18	49.58];
 KNeighbors	      = [62.09	61.97	61.13	57.64];
-DecisionTree 	  = [59.69	58.36	58.24	56.80];
-RandomForest 	  = [62.33	63.18	61.73	57.40];
+% DecisionTree 	  = [59.69	58.36	58.24	56.80];
+% RandomForest 	  = [62.33	63.18	61.73	57.40];
 % LGBM         	  = [94.58	94.34	94.71	93.38];
 SVC          	  = [55.96	53.79	53.79	55.84];
 MLP          	  = [57.28	58.00	57.40	55.11];
@@ -123,12 +124,12 @@ Proposed = [94.71	94.46	93.50	93.38];
 
 figure('units','normalized','outerposition',[0 0 1 1])
 t = tiledlayout(1,2,'TileSpacing','compact','Padding','compact','units','normalized','outerposition',[0 0 1 1]);
-nexttile
-b = bar(([0,1,2,3]),[LogisticRegression;KNeighbors;DecisionTree;RandomForest;SVC;MLP;TSiT;ConvTran;TSSequencer;Proposed],'EdgeColor','none','FaceAlpha',0.6);
-ylabel('Accuracy ($\%$)','FontSize',size1-10,'Interpreter','latex')
-% xlabel('Prediction horizons (days)','FontSize',size1,'Interpreter','latex')
+nexttile%LogisticRegression;DecisionTree;RandomForest;
+
+b1 = bar(([0,1,2,3]),[KNeighbors;SVC;MLP;TSiT;ConvTran;TSSequencer;Proposed],'EdgeColor','none','FaceAlpha',0.6);
+ylabel('Accuracy ($\%$)','FontSize',size1-12,'Interpreter','latex')
 hold on,
-yline(mean([Season_naive_baseline;Location_naive_baseline;Season_Location_HGB],'all'),':','Avg. baselines','HandleVisibility','off','Interpreter','latex',...
+y1 = yline(mean([Season_naive_baseline;Location_naive_baseline;Season_Location_HGB],'all'),':','Interpreter','latex',...
 'LabelHorizontalAlignment','left','LabelVerticalAlignment','top',...
 'FontSize',size1-12,'LineWidth',2, 'Color',[0 0 0]);
 
@@ -139,33 +140,33 @@ yline(mean([Season_naive_baseline;Location_naive_baseline;Season_Location_HGB],'
 set(gca,'ylim',[40 100])
 set(gca, 'XTickLabel', {'+0','+7','+30','+90'},'TickLabelInterpreter','latex')
 
-set(gca,'Box','on','FontSize',size1-10,'TickLabelInterpreter','latex','LineWidth',0.5,'YMinorGrid','on','YMinorTick','on','TickDir','in','YGrid','on');
+set(gca,'Box','on','FontSize',size1-12,'TickLabelInterpreter','latex','LineWidth',0.5,'YMinorGrid','on','YMinorTick','on','TickDir','in','YGrid','on');
 % legend1 = legend({'LogisticRegression','KNeighbors','DecisionTree','RandomForest','SVC','MLP','TSiT','ConvTran','TSSequencer','Proposed Model'});
 % set(legend1,'Interpreter','latex','FontSize',size1,'Orientation','horizontal','Location','northeastoutside','NumColumns',1);
 % title(legend1,'Technique');
 colororder(gca,"gem12")
 
-xtips1 = b(end).XEndPoints;
-ytips1 = b(end).YEndPoints+2.6;
-labels1 = strcat(string(b(end).YData),'\%');
+xtips1 = b1(end).XEndPoints;
+ytips1 = b1(end).YEndPoints-2.5;
+labels1 = strcat(string(b1(end).YData),'\%');
 text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
-    'VerticalAlignment','middle', 'FontSize',size1-22,'Interpreter','latex','Rotation',90)
+    'VerticalAlignment','middle', 'FontSize',size1-20,'Interpreter','latex','Rotation',90)
 
 % exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\ResultsAccuracy_task1.eps'),"ContentType","vector")
 % 
 % %% wildfire occurrence prediction as figure - Task1|FAR
 
 clc
-size1 = 40;
+size1 = 35;
 %accuracy
 Season_naive_baseline   = [30.19	42.51	35.27	24.40];
 Location_naive_baseline	= [0.00	0.00	0.00	0.00];
 Season_Location_HGB	    = [35.49	37.17	38.13	35.25];
 
-LogisticRegression= [49.88	51.08	50.84	52.04];
+% LogisticRegression= [49.88	51.08	50.84	52.04];
 KNeighbors	      = [37.89	38.37	39.09	42.45];
-DecisionTree 	  = [38.13	42.93	41.01	44.12];
-RandomForest 	  = [37.17	35.73	37.65	40.05];
+% DecisionTree 	  = [38.13	42.93	41.01	44.12];
+% RandomForest 	  = [37.17	35.73	37.65	40.05];
 % LGBM         	  = [5.28	5.76	5.04	5.52];
 SVC          	  = [62.35	52.04	50.84	61.63];
 MLP          	  = [41.25	42.45	45.32	44.12];
@@ -175,12 +176,11 @@ TSSequencer  	  = [0.72	0.72	0.72	6.47];
 Proposed = [3.84	3.84	5.04	4.56];
 
 
-nexttile
-b = bar(([0,1,2,3]),[LogisticRegression;KNeighbors;DecisionTree;RandomForest;SVC;MLP;TSiT;ConvTran;TSSequencer;Proposed],'EdgeColor','none','FaceAlpha',0.6);
-ylabel('False Alarm Rate ($\%$)','FontSize',size1-10,'Interpreter','latex')
-% xlabel('Prediction horizons (days)','FontSize',size1,'Interpreter','latex')
+nexttile%LogisticRegression;DecisionTree;RandomForest;
+b = bar(([0,1,2,3]),[KNeighbors;SVC;MLP;TSiT;ConvTran;TSSequencer;Proposed],'EdgeColor','none','FaceAlpha',0.6);
+ylabel('False Alarm Rate ($\%$)','FontSize',size1-12,'Interpreter','latex')
 hold on,
-yline(mean([Season_naive_baseline;Location_naive_baseline;Season_Location_HGB],'all'),':','Avg. baselines','HandleVisibility','off','Interpreter','latex',...
+yline(mean([Season_naive_baseline;Location_naive_baseline;Season_Location_HGB],'all'),':','Interpreter','latex',...
 'LabelHorizontalAlignment','left','LabelVerticalAlignment','top',...
 'FontSize',size1-12,'LineWidth',2, 'Color',[0 0 0]);
 % 
@@ -190,39 +190,40 @@ yline(mean([Season_naive_baseline;Location_naive_baseline;Season_Location_HGB],'
 
 set(gca,'ylim',[0 70])
 set(gca, 'XTickLabel', {'+0','+7','+30','+90'},'TickLabelInterpreter','latex')
-
-set(gca,'Box','on','FontSize',size1-10,'TickLabelInterpreter','latex','LineWidth',0.5,'YMinorGrid','on','YMinorTick','on','TickDir','in','YGrid','on');
-legend1 = legend({'LogisticRegression','KNeighbors','DecisionTree','RandomForest','SVC','MLP','TSiT','ConvTran','TSSequencer','Proposed Model'});
-set(legend1,'Interpreter','latex','FontSize',size1-10,'Orientation','horizontal','Location','northeastoutside','NumColumns',1);
-title(legend1,'Technique');
-colororder(gca,"gem12")
+%'LogisticRegression','DecisionTree','RandomForest',
+set(gca,'Box','on','FontSize',size1-12,'TickLabelInterpreter','latex','LineWidth',0.5,'YMinorGrid','on','YMinorTick','on','TickDir','in','YGrid','on');
 
 for i = length(b):length(b)
     xtips1 = b(i).XEndPoints;
     ytips1 = b(i).YEndPoints+2.6;
     labels1 = strcat(string(b(i).YData),'\%');
     text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
-        'VerticalAlignment','middle', 'FontSize',size1-22,'Interpreter','latex','Rotation',90)
+        'VerticalAlignment','middle', 'FontSize',size1-20,'Interpreter','latex','Rotation',90)
 end
-
 xlabel(t,'Prediction horizons (days)','FontSize',size1-10,'Interpreter','latex')
 
-exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\Results_task1.eps'),"ContentType","vector")
 
+legend1 = legend([y1 b1],{'Avg. baselines', 'KNeighbors','SVC','MLP','TSiT','ConvTran','TSSequencer','Proposed Model'});
+set(legend1,'Interpreter','latex','FontSize',size1-10,'Orientation','horizontal');
+% title(legend1,'Technique');
+colororder(gca,"gem12")
+legend1.Layout.Tile = 'North';
+% 
+exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\Results_task1_v2.eps'),"ContentType","vector")
 
 %% wildfire occurrence prediction as figure - Task2
 clc
 clear
-size1 = 40;
+size1 = 35;
 
 
 %RMSE
 Season_naive_baseline   = [204.83	204.17	204.99	205.30];
 Season_Location_HGB	    = [217.90	215.76	215.79	218.86];
-LinearRegression  = [202.86	203.01	204.72	205.51];
-SGD               = [210.93	214.96	211.52	207.95]; 
+% LinearRegression  = [202.86	203.01	204.72	205.51];
+% SGD               = [210.93	214.96	211.52	207.95]; 
 KNeighbors	      = [187.64	196.87	190.57	200.38];
-RandomForest 	  = [185.32	196.21	193.10	200.46];
+% RandomForest 	  = [185.32	196.21	193.10	200.46];
 SVR          	  = [211.05	210.89	211.19	210.91];
 MLP          	  = [214.62	214.48	201.59	212.98];
 TSiT         	  = [205.02	205.37 207.24 206.65];
@@ -233,12 +234,12 @@ Proposed = [190.55	195.18	194.51	195.76];
 
 figure('units','normalized','outerposition',[0 0 1 1])
 t = tiledlayout(1,2,'TileSpacing','compact','Padding','compact','units','normalized','outerposition',[0 0 1 1]);
-nexttile%categorical([0,7,30,90])
-b = bar([0 1 2 3],[LinearRegression;SGD;KNeighbors;RandomForest;SVR;MLP;TSiT;ConvTran;TSSequencer;Proposed],'EdgeColor','none','FaceAlpha',0.6);
-ylabel('Root Mean Squared Error ($km^2$)','FontSize',size1-10,'Interpreter','latex')
+nexttile%categorical([0,7,30,90])%LinearRegression;SGD;RandomForest;
+b1 = bar([0 1 2 3],[KNeighbors;SVR;MLP;TSiT;ConvTran;TSSequencer;Proposed],'EdgeColor','none','FaceAlpha',0.6);
+ylabel('Root Mean Squared Error ($km^2$)','FontSize',size1-10,'Interpreter','latex');
 % xlabel('Prediction horizons (days)','FontSize',size1,'Interpreter','latex')
 hold on,
-yline(mean([Season_naive_baseline;Season_Location_HGB],'all'),':','Avg. baselines','HandleVisibility','off','Interpreter','latex',...
+y1 = yline(mean([Season_naive_baseline;Season_Location_HGB],'all'),':','Interpreter','latex',...
 'LabelHorizontalAlignment','left','LabelVerticalAlignment','top',...
 'FontSize',size1-12,'LineWidth',2, 'Color',[0 0 0]);
 
@@ -246,31 +247,31 @@ set(gca,'ylim',[180 216])
 set(gca, 'XTickLabel', {'+0','+7','+30','+90'},'TickLabelInterpreter','latex')
 
 set(gca,'Box','on','FontSize',size1-10,'TickLabelInterpreter','latex','LineWidth',0.5,'YMinorGrid','on','YMinorTick','on','TickDir','in','YGrid','on');
-% legend1 = legend({'LogisticRegression','KNeighbors','DecisionTree','RandomForest','SVC','MLP','TSiT','ConvTran','TSSequencer','Proposed Model'});
+% legend1 = legend({'LogisticRegression','KNeighbors','DecisionTree','RandomForest','SVR','MLP','TSiT','ConvTran','TSSequencer','Proposed Model'});
 % set(legend1,'Interpreter','latex','FontSize',size1,'Orientation','horizontal','Location','northeastoutside','NumColumns',1);
 % title(legend1,'Technique');
 colororder(gca,"gem12")
 
-xtips1 = b(end).XEndPoints;
-ytips1 = b(end).YEndPoints+2.4;
-labels1 = strcat(string(b(end).YData),'$km^2$');
+xtips1 = b1(end).XEndPoints;
+ytips1 = b1(end).YEndPoints+2.4;
+labels1 = strcat(string(b1(end).YData),'$km^2$');
 text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
-    'VerticalAlignment','middle', 'FontSize',size1-22,'Interpreter','latex','Rotation',90)
+    'VerticalAlignment','middle', 'FontSize',size1-20,'Interpreter','latex','Rotation',90)
 
 % exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\ResultsRMSE_task2.eps'),"ContentType","vector")
 % 
 % %% wildfire occurrence prediction as figure - Task1|FAR
 
 clc
-size1 = 40;
+size1 = 35;
 %MASE
 
 Season_naive_baseline   = [0.81	0.80	0.81	0.82];
 Season_Location_HGB	    = [0.84	0.82	0.83	0.85];
-LinearRegression  = [0.81	0.81	0.83	0.82];
-SGD               = [0.54	0.74	0.53	0.63]; 
+% LinearRegression  = [0.81	0.81	0.83	0.82];
+% SGD               = [0.54	0.74	0.53	0.63]; 
 KNeighbors	      = [0.69	0.71	0.68	0.69];
-RandomForest 	  = [0.70	0.73	0.75	0.74];
+% RandomForest 	  = [0.70	0.73	0.75	0.74];
 SVR          	  = [0.56	0.56	0.56	0.56];
 MLP          	  = [0.80	0.72	0.72	0.89];
 TSiT         	  = [0.77	0.76	0.69	0.77];
@@ -279,12 +280,12 @@ TSSequencer  	  = [0.64	0.62	0.59	0.62];
 
 Proposed = [0.66	0.72	0.74	0.72];
 
-nexttile%categorical([0,7,30,90])
-b = bar([0 1 2 3],[LinearRegression;SGD;KNeighbors;RandomForest;SVR;MLP;TSiT;ConvTran;TSSequencer;Proposed],'EdgeColor','none','FaceAlpha',0.6);
+nexttile%categorical([0,7,30,90])%LinearRegression;SGD;RandomForest;
+b = bar([0 1 2 3],[KNeighbors;SVR;MLP;TSiT;ConvTran;TSSequencer;Proposed],'EdgeColor','none','FaceAlpha',0.6);
 ylabel('Mean Absolute Scaled Error','FontSize',size1-10,'Interpreter','latex')
 % xlabel('Prediction horizons (days)','FontSize',size1,'Interpreter','latex')
 hold on,
-yline(mean([Season_naive_baseline;Season_Location_HGB],'all'),':','Avg. baselines','HandleVisibility','off','Interpreter','latex',...
+yline(mean([Season_naive_baseline;Season_Location_HGB],'all'),':','Interpreter','latex',...
 'LabelHorizontalAlignment','left','LabelVerticalAlignment','top',...
 'FontSize',size1-12,'LineWidth',2, 'Color',[0 0 0]);
 
@@ -292,35 +293,41 @@ set(gca,'ylim',[0.4 1])
 set(gca, 'XTickLabel', {'+0','+7','+30','+90'},'TickLabelInterpreter','latex')
 
 set(gca,'Box','on','FontSize',size1-10,'TickLabelInterpreter','latex','LineWidth',0.5,'YMinorGrid','on','YMinorTick','on','TickDir','in','YGrid','on');
-legend1 = legend({'LinearRegression','SGD','KNeighbors','RandomForest','SVR','MLP','TSiT','ConvTran','TSSequencer','Proposed Model'});
-set(legend1,'Interpreter','latex','FontSize',size1-10,'Orientation','horizontal','Location','northeastoutside','NumColumns',1);
-title(legend1,'Technique');
-colororder(gca,"gem12")
+% legend1 = legend({'LinearRegression','SGD','KNeighbors','RandomForest','SVR','MLP','TSiT','ConvTran','TSSequencer','Proposed Model'});
+% set(legend1,'Interpreter','latex','FontSize',size1-10,'Orientation','horizontal','Location','northeastoutside','NumColumns',1);
+% title(legend1,'Technique');
+% colororder(gca,"gem12")
 
 for i = length(b):length(b)
     xtips1 = b(i).XEndPoints;
     ytips1 = b(i).YEndPoints+.015;
     labels1 = (string(b(i).YData));
     text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
-        'VerticalAlignment','middle', 'FontSize',size1-22,'Interpreter','latex','Rotation',90)
+        'VerticalAlignment','middle', 'FontSize',size1-20,'Interpreter','latex','Rotation',90)
 end
 
 xlabel(t,'Prediction horizons (days)','FontSize',size1-10,'Interpreter','latex')
 
-exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\Results_task2.eps'),"ContentType","vector")
+legend1 = legend([y1 b1],{'Avg. baselines', 'KNeighbors','SVR','MLP','TSiT','ConvTran','TSSequencer','Proposed Model'});
+set(legend1,'Interpreter','latex','FontSize',size1-10,'Orientation','horizontal');
+% title(legend1,'Technique');
+colororder(gca,"gem12")
+legend1.Layout.Tile = 'North';
+% 
+exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\Results_task2_v2.eps'),"ContentType","vector")
 
 %% wildfire duration prediction as figure - Task3
 clc
 clear
-size1 = 40;
+size1 = 35;
 
 %RMSE
 Season_naive_baseline   = [9.10	9.04	9.11	9.08];
 Season_Location_HGB	    = [8.89	9.05	9.08	8.97];
-LinearRegression  = [8.83	8.82	8.91	8.93];
-SGD               = [10.22	9.86	9.51	9.98]; 
+% LinearRegression  = [8.83	8.82	8.91	8.93];
+% SGD               = [10.22	9.86	9.51	9.98]; 
 KNeighbors	      = [7.28	6.92	6.98	6.85];
-RandomForest 	  = [6.82	6.89	6.92	7.33];
+% RandomForest 	  = [6.82	6.89	6.92	7.33];
 SVR          	  = [9.28	9.46	9.59	9.58];
 MLP          	  = [8.48	7.71	7.48	7.98];
 TSiT         	  = [8.22	8.37 8.26 8.38];
@@ -331,12 +338,12 @@ Proposed = [6.68	7.14	6.69	7.03];
 
 figure('units','normalized','outerposition',[0 0 1 1])
 t = tiledlayout(1,2,'TileSpacing','compact','Padding','compact','units','normalized','outerposition',[0 0 1 1]);
-nexttile%categorical([0,7,30,90])
-b = bar([0 1 2 3],[LinearRegression;SGD;KNeighbors;RandomForest;SVR;MLP;TSiT;ConvTran;TSSequencer;Proposed],'EdgeColor','none','FaceAlpha',0.6);
+nexttile%categorical([0,7,30,90])%LinearRegression;SGD;RandomForest;
+b1 = bar([0 1 2 3],[KNeighbors;SVR;MLP;TSiT;ConvTran;TSSequencer;Proposed],'EdgeColor','none','FaceAlpha',0.6);
 ylabel('Root Mean Squared Error (days)','FontSize',size1-10,'Interpreter','latex')
 % xlabel('Prediction horizons (days)','FontSize',size1,'Interpreter','latex')
 hold on,
-yline(mean([Season_naive_baseline;Season_Location_HGB],'all'),':','Avg. baselines','HandleVisibility','off','Interpreter','latex',...
+y1 = yline(mean([Season_naive_baseline;Season_Location_HGB],'all'),':','Interpreter','latex',...
 'LabelHorizontalAlignment','left','LabelVerticalAlignment','top',...
 'FontSize',size1-12,'LineWidth',2, 'Color',[0 0 0]);
 
@@ -349,26 +356,26 @@ set(gca,'Box','on','FontSize',size1-10,'TickLabelInterpreter','latex','LineWidth
 % title(legend1,'Technique');
 colororder(gca,"gem12")
 
-xtips1 = b(end).XEndPoints;
-ytips1 = b(end).YEndPoints+.26;
-labels1 = strcat(string(b(end).YData),' days');
+xtips1 = b1(end).XEndPoints;
+ytips1 = b1(end).YEndPoints+.26;
+labels1 = strcat(string(b1(end).YData),' days');
 text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
-    'VerticalAlignment','middle', 'FontSize',size1-22,'Interpreter','latex','Rotation',90)
+    'VerticalAlignment','middle', 'FontSize',size1-20,'Interpreter','latex','Rotation',90)
 
 % exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\ResultsRMSE_task3.eps'),"ContentType","vector")
 % 
 % %% wildfire occurrence prediction as figure - Task1|FAR
 
 clc
-size1 = 40;
+size1 = 35;
 %MASE
 
 Season_naive_baseline   = [0.80	0.80	0.80	0.80];
 Season_Location_HGB	    = [0.73	0.73	0.73	0.73];
-LinearRegression  = [0.78	0.78	0.79	0.78];
-SGD               = [0.65	0.63	0.67	0.67]; 
+% LinearRegression  = [0.78	0.78	0.79	0.78];
+% SGD               = [0.65	0.63	0.67	0.67]; 
 KNeighbors	      = [0.59	0.58	0.59	0.58];
-RandomForest 	  = [0.57	0.58	0.58	0.60];
+% RandomForest 	  = [0.57	0.58	0.58	0.60];
 SVR          	  = [0.59	0.60	0.61	0.61];
 MLP          	  = [0.75	0.73	0.70	0.75];
 TSiT         	  = [0.72 0.73 0.76 0.75];
@@ -377,12 +384,12 @@ TSSequencer  	  = [0.68	0.68	0.71	0.71];
 
 Proposed = [0.52	0.57	0.53	0.55];
 
-nexttile%categorical([0,7,30,90])
-b = bar([0 1 2 3],[LinearRegression;SGD;KNeighbors;RandomForest;SVR;MLP;TSiT;ConvTran;TSSequencer;Proposed],'EdgeColor','none','FaceAlpha',0.6);
+nexttile%categorical([0,7,30,90])%LinearRegression;SGD;RandomForest;
+b = bar([0 1 2 3],[KNeighbors;SVR;MLP;TSiT;ConvTran;TSSequencer;Proposed],'EdgeColor','none','FaceAlpha',0.6);
 ylabel('Mean Absolute Scaled Error','FontSize',size1-10,'Interpreter','latex')
 % xlabel('Prediction horizons (days)','FontSize',size1,'Interpreter','latex')
 hold on,
-yline(mean([Season_naive_baseline;Season_Location_HGB],'all'),':','Avg. baselines','HandleVisibility','off','Interpreter','latex',...
+yline(mean([Season_naive_baseline;Season_Location_HGB],'all'),':','Interpreter','latex',...
 'LabelHorizontalAlignment','left','LabelVerticalAlignment','top',...
 'FontSize',size1-12,'LineWidth',2, 'Color',[0 0 0]);
 
@@ -390,22 +397,24 @@ set(gca,'ylim',[0.4 1])
 set(gca, 'XTickLabel', {'+0','+7','+30','+90'},'TickLabelInterpreter','latex')
 
 set(gca,'Box','on','FontSize',size1-10,'TickLabelInterpreter','latex','LineWidth',0.5,'YMinorGrid','on','YMinorTick','on','TickDir','in','YGrid','on');
-legend1 = legend({'LinearRegression','SGD','KNeighbors','RandomForest','SVR','MLP','TSiT','ConvTran','TSSequencer','Proposed Model'});
-set(legend1,'Interpreter','latex','FontSize',size1-10,'Orientation','horizontal','Location','northeastoutside','NumColumns',1);
-title(legend1,'Technique');
-colororder(gca,"gem12")
 
 for i = length(b):length(b)
     xtips1 = b(i).XEndPoints;
     ytips1 = b(i).YEndPoints+.015;
     labels1 = (string(b(i).YData));
     text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
-        'VerticalAlignment','middle', 'FontSize',size1-22,'Interpreter','latex','Rotation',90)
+        'VerticalAlignment','middle', 'FontSize',size1-20,'Interpreter','latex','Rotation',90)
 end
 
 xlabel(t,'Prediction horizons (days)','FontSize',size1-10,'Interpreter','latex')
 
-exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\Results_task3.eps'),"ContentType","vector")
+legend1 = legend([y1 b1], {'Avg. baselines','KNeighbors','SVR','MLP','TSiT','ConvTran','TSSequencer','Proposed Model'});
+set(legend1,'Interpreter','latex','FontSize',size1-10,'Orientation','horizontal');
+% title(legend1,'Technique');
+colororder(gca,"gem12")
+legend1.Layout.Tile = 'North';
+
+exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\Results_task3_v2.eps'),"ContentType","vector")
 
 
 %% Fire Detection Prediction Map Plot
@@ -499,16 +508,20 @@ geolimits(limlats,limlons)
 geobasemap topographic
 title('No fire class','FontSize',size1-15,'Interpreter','latex')
 set(gca,'Box','on','FontSize',size1-15,'FontName','helvetica','LineWidth',0.5);
-gx = gca;
-gx.LongitudeAxis.FontSize = size1-10;
-gx.LongitudeAxis.TickLabelInterpreter = 'latex';
-gx.LongitudeAxis.TickLabels = strrep(get(gx.LongitudeAxis,'TickLabels'),'°','$^{\circ}$');
-gx.LatitudeAxis.FontSize = size1-10;
-gx.LatitudeAxis.TickLabelInterpreter = 'latex';
-gx.LatitudeAxis.TickLabels = strrep(get(gx.LatitudeAxis,'TickLabels'),'°','$^{\circ}$');
+gx2 = gca;
+gx2.LongitudeAxis.FontSize = size1-10;
+gx2.LongitudeAxis.TickLabelInterpreter = 'latex';
+gx2.LongitudeAxis.TickLabels = strrep(get(gx2.LongitudeAxis,'TickLabels'),'°','$^{\circ}$');
+gx2.LatitudeAxis.FontSize = size1-10;
+gx2.LatitudeAxis.TickLabelInterpreter = 'latex';
+gx2.LatitudeAxis.TickLabels = strrep(get(gx2.LatitudeAxis,'TickLabels'),'°','$^{\circ}$');
 
 %manual edit the labels and location of legend first then export
 % exportgraphics(gcf,fullfile('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2', strcat('Preds_OccurrenceViz','.pdf')),"ContentType","image")
+%% Run this after updating figure from previous section
+ExportGEOTIFF(gx, 'Preds_OccurrenceViz_1')
+ExportGEOTIFF(gx2, 'Preds_OccurrenceViz_2')
+
 %% Fire detection prediction over different horizons
 clear
 clc
@@ -723,8 +736,9 @@ gx.LongitudeAxis.TickLabels = strrep(get(gx.LongitudeAxis,'TickLabels'),'°','$^
 gx.LatitudeLabel.Interpreter = 'latex';
 gx.LongitudeLabel.Interpreter = 'latex';
 
-exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Month19\Fire\Figure_FireClusters.pdf'),"ContentType","image")
+% exportgraphics(gcf,strcat('C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Month19\Fire\Figure_FireClusters.pdf'),"ContentType","image")
 
+ExportGEOTIFF(gca, 'Figure_FireClusters')
 %% Figure wildfires and conditioning features maps
 
 clc
@@ -1647,7 +1661,7 @@ linestyleorder("mixedmarkers")
 % set(gca,'Box','on','XTickLabelRotation',90,'FontSize',size1-5,'TickLabelInterpreter','latex','LineWidth',0.5,'YMinorGrid','on','YMinorTick','on','TickDir','in','TickLength',[0.005 0.005],'XGrid','on','YGrid','on');
 % set(gca,'FontSize',size1,'TickLabelInterpreter','latex');
 
-%% Error boxchart plots per 
+%% (old) Error boxchart plots per 
 clear
 clc
 dir_name = 'C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\results\';
@@ -1717,6 +1731,99 @@ xlabel(t,'Prediction horizons (days)','FontSize',size1-10,'Interpreter','latex')
 %edit location of the second legend before exporting!
 % exportgraphics(gcf,fullfile(dir_name, strcat('ErrorsBoxplot_Task2_3.pdf')),"ContentType","image")
 
+%% (new) bar charts with 95% confidence intervals for prediction errors
+clear
+clc
+dir_name = 'C:\Users\mohamed.ahajjam\Desktop\UND\Defense resiliency platform\Datasets\Fire\NewWork\V2\results\';
+addpath(dir_name)
+
+size1 = 40;
+files = dir(fullfile(dir_name, '*.csv'));
+trgts_all = {'Fire','Burnt','Duration'};
+hrzs = {'hrz0','hrz7','hrz30','hrz90'};
+hrzs_names = {'+0','+7','+30','+90'};
+
+% Define a custom color map
+colors = lines(5); % Use 'lines' colormap
+
+figure('units','normalized','outerposition',[0 0 1 1])
+t = tiledlayout(1,2,'TileSpacing','compact','Padding','compact','units','normalized','outerposition',[0 0 1 1]);
+
+for j = 2:3
+    nexttile
+    trgt = trgts_all{j};
+    filenames = {files.name}.';
+    filenames = filenames(contains(filenames,trgt));
+    
+    means = zeros(4, 4); % Assuming 4 horizons and 4 categories
+    ci_95 = zeros(4, 4); % Confidence intervals
+    
+    if j == 2
+        all_categories = {']0-2]$km^2$', ']2-100]$km^2$', ']100-500]$km^2$', '$>$500$km^2$'};
+        bin_edges = [0 2 100 500 Inf]; % Correct bin edges for burnt area
+    else
+        all_categories = {']0-2] days', ']2-7] days', ']7-14] days', ']14-30] days', '$>$30 days'};
+        bin_edges = [0 2 7 14 30 Inf]; % Correct bin edges for duration
+    end
+
+    for i = 1:4 % All horizons
+        test_files = filenames(contains(filenames,hrzs{i}) & contains(filenames,'test'));
+        eval(sprintf('test_data_%s = readtable(test_files{:},detectImportOptions(test_files{:}));',hrzs{i}));
+        eval(sprintf('ERROR_%s = (test_data_%s.test_targs-test_data_%s.test_preds);',hrzs{i},hrzs{i},hrzs{i}));
+        
+        % Using fixed bin edges that align with your categories
+        eval(sprintf('cats_%s = discretize(test_data_%s.test_targs, bin_edges, ''categorical'', all_categories);',hrzs{i},hrzs{i}));
+
+        for k = 1:length(all_categories)
+            eval(sprintf('cat_errors = ERROR_%s(cats_%s == all_categories{k});', hrzs{i}, hrzs{i}));
+            means(i, k) = mean(cat_errors);
+            std_err = std(cat_errors) / sqrt(length(cat_errors)); % Standard error
+            t_value = tinv(0.975, length(cat_errors) - 1); % T-value for 95% CI
+            ci_95(i, k) = t_value * std_err;
+        end
+    end
+    
+    % Create grouped bar chart
+    b = bar(1:4, means, 'grouped', 'BarWidth', 0.8, 'EdgeColor','none','FaceAlpha',0.5);
+    hold on;
+    
+    % Color the bars
+    for k = 1:length(all_categories)
+        b(k).FaceColor = colors(k,:);
+    end
+    
+    % Add error bars to each bar group
+    ngroups = size(means, 1);
+    nbars = size(means, 2);
+    groupwidth = min(0.8, nbars/(nbars + 1.5));
+    for i = 1:nbars
+        % Align error bars with bars
+        x = (1:ngroups) - groupwidth/2 + (2*i-1) * groupwidth / (2*nbars);
+        errorbar(x, means(:, i), ci_95(:, i), 'dk', 'linestyle', 'none', 'CapSize', 10, 'LineWidth', 1.5, 'MarkerFaceColor','white',MarkerEdgeColor='auto');
+    end
+
+    % Enhance the grid and axis appearance
+    set(gca,'xticklabels', categorical(hrzs_names),'TickLabelInterpreter','latex', 'Box','on','FontSize',size1-10,'TickLabelInterpreter','latex','LineWidth',1,...
+        'YMinorGrid','on','XMinorTick','on','TickDir','in','TickLength',[0.01 0.01],...
+        'YGrid','off','XGrid','off', 'GridAlpha', 0.6); % Lighter grid lines with 'GridAlpha'
+
+    switch j
+        case 2
+            ylabel('Error ($km^2$)','FontSize',size1-10,'Interpreter','latex')
+            legend1 = legend(all_categories,'Orientation','horizontal','Location','northoutside','Interpreter','latex','FontSize',size1-20);
+            title(legend1,'Total burnt area')
+        case 3
+            ylabel('Error (days)','FontSize',size1-10,'Interpreter','latex')
+            legend1 = legend(all_categories,'Orientation','horizontal','Location','northoutside','Interpreter','latex','FontSize',size1-20);
+            title(legend1,'Wildfire duration')
+    end
+end
+
+% Add global xlabel
+xlabel(t,'Prediction horizons (days)','FontSize',size1-10,'Interpreter','latex')
+
+% Export % make sure to align the legends first
+% exportgraphics(t,fullfile(dir_name, 'Errors95CI_Task2_3.pdf')) % Use vector for best quality
 
 %% Function
 function tmp = get_astronomical_season_str(dates)
@@ -1740,4 +1847,40 @@ function tmp = get_astronomical_season_str(dates)
     seasons(dates >= winter_solstice | dates < spring_equinox) = 3; % Winter
 
     tmp = sns(seasons + 1);
+end
+
+
+
+function ExportGEOTIFF(gx, basename)
+    try % Export figure as a high-resolution JPEG
+    % basename = 'Figure_RawDataset';
+    exportgraphics(gx, [basename '.jpg'], 'Resolution', 300)
+    
+    % Define geographic reference object for world file
+    rasterSize = size(imread([basename '.jpg']));
+    [latitudeLimits,longitudeLimits] = geolimits(gx);
+    R = georefcells(latitudeLimits, longitudeLimits, rasterSize);
+    
+    % Write the world file with geographic information
+    worldfilename = getworldfilename([basename '.jpg']);
+    worldfilewrite(R, worldfilename);
+    
+    % Read the exported JPEG and world file
+    A1 = imread([basename '.jpg']);
+    R1 = worldfileread(worldfilename, 'geographic', size(A1));
+    
+    % Specify the CRS (WGS84, which is EPSG:4326) and other georeferencing information
+    geoKeyDirectoryTag.GTModelTypeGeoKey = 2; % Geographic coordinate system
+    geoKeyDirectoryTag.GTRasterTypeGeoKey = 1; % Raster pixel is area
+    geoKeyDirectoryTag.GeographicTypeGeoKey = 4326; % WGS84 EPSG code
+    
+    % Write the raster data to a GeoTIFF file
+    filename1 = [basename '.tif'];
+    geotiffwrite(filename1, A1, R1, 'GeoKeyDirectoryTag', geoKeyDirectoryTag);
+    
+    % Notify completion
+    fprintf('GeoTIFF file has been generated successfully.\n');
+    catch
+        warning('Error!')
+    end
 end
