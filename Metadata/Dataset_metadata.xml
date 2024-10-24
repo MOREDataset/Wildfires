@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+<metainfo>
+  <metd>20241024</metd>
+  <metc>
+    <cntinfo>
+      <cntperp>
+        <cntper>Aymane Ahajjam</cntper>
+        <cntorg>University of North Dakota</cntorg>
+      </cntperp>
+      <cntaddr>
+        <addrtype>Mailing Address</addrtype>
+        <address>University of North Dakota</address>
+        <city>Grand Forks</city>
+        <state>ND</state>
+        <postal>58202</postal>
+      </cntaddr>
+      <cntvoice>(701) 777-2180</cntvoice>
+      <cntemail>mohamed.ahajjam@und.edu</cntemail>
+    </cntinfo>
+  </metc>
+  <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+  <metstdv>FGDC-STD-001-1998</metstdv>
+</metainfo>
+  
+  <!-- Identification Information -->
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>Aymane Ahajjam, University of North Dakota</origin>
+        <pubdate>20241024</pubdate>
+        <title>Alaska Wildfire Prediction using Geospatial Features and Machine Learning</title>
+        <onlink>https://github.com/MOREDataset/Wildfires</onlink>
+      </citeinfo>
+    </citation>
+
+    <!-- Abstract and Purpose -->
+    <descript>
+      <abstract>Wildfires pose a significant threat to ecosystems worldwide, including the diverse landscapes of Alaska. This study addresses the challenge of wildfire occurrence and behavior prediction in Alaska by developing a comprehensive framework that leverages satellite-based data, geospatial features, optimization, and machine learning (ML). NASA's FIRMS dataset spanning +20 years is processed using a spatio-temporal clustering algorithm to create refined wildfire datasets. A Genetic Algorithm (GA) is used for feature selection from 50 geospatial features. Histogram Gradient Boosting (HistGB) is used for modeling wildfire occurrence, burnt area, and duration.</abstract>
+      <purpose>This research enhances the prediction accuracy of wildfire occurrence, burnt area, and duration using machine learning models, supporting improved wildfire management strategies in Alaska.</purpose>
+    </descript>
+
+    <!-- Time Period of Content -->
+    <timeperd>
+      <timeinfo>
+        <rngdates>
+          <begdate>20000101</begdate>
+          <enddate>20221231</enddate>
+        </rngdates>
+      </timeinfo>
+      <current>Ground condition</current>
+    </timeperd>
+
+    <!-- Status -->
+    <status>
+      <progress>Complete</progress>
+      <update>None planned</update>
+    </status>
+
+    <!-- Bounding Coordinates -->
+    <spdom>
+      <bounding>
+        <westbc>-179.148909</westbc>
+        <eastbc>-129.978247</eastbc>
+        <northbc>71.538800</northbc>
+        <southbc>51.214183</southbc>
+      </bounding>
+    </spdom>
+
+    <!-- Keywords and Thesaurus -->
+    <keywords>
+      <theme>
+        <themekt>NASA FIRMS Thesaurus</themekt>
+        <themekey>wildfire</themekey>
+        <themekey>prediction</themekey>
+        <themekey>geospatial analysis</themekey>
+        <themekey>machine learning</themekey>
+      </theme>
+    </keywords>
+
+    <!-- Access and Use Constraints -->
+    <accconst>None</accconst>
+    <useconst>None</useconst>
+
+  </idinfo>
+
+  <!-- Data Quality Information -->
+  <dataqual>
+    <attracc>
+      <attraccr>Data accuracy and attributes for wildfire occurrences and predictions are based on validated remote sensing products and ERA5 reanalysis data.</attraccr>
+    </attracc>
+    <logic>Logical consistency was ensured through verification of spatio-temporal clustering and machine learning processes.</logic>
+    <complete>Dataset covers the temporal period (2000-2022), though wildfire events occur irregularly.</complete>
+    <lineage>
+      <procstep>
+        <procdesc>Wildfire datasets were processed from NASA FIRMS data, including spatial and temporal clustering, and predictions were made using ML techniques. Spatio-temporal clustering was performed using the DBSCAN algorithm from the scikit-learn library.</procdesc>
+        <procdate>2023</procdate>
+      </procstep>
+    </lineage>
+  </dataqual>
+
+  <!-- Spatial Data Organization Information -->
+  <spdoinfo>
+    <direct>Raster</direct>
+  </spdoinfo>
+
+  <!-- Spatial Reference Information -->
+  <spref>
+    <horizsys>
+      <geograph>
+        <latres>0.0001</latres>
+        <longres>0.0001</longres>
+        <geogunit>Decimal degrees</geogunit>
+      </geograph>
+    </horizsys>
+  </spref>
+
+  <!-- Entity and Attribute Information -->
+  <eainfo>
+    <detailed>
+      <enttyp>
+        <enttypl>Wildfire Prediction Geospatial Features</enttypl>
+        <enttypd>Geospatial features from remote sensing and reanalysis data used for predicting wildfire occurrence and behavior.</enttypd>
+        <enttypds>University of North Dakota</enttypds>
+      </enttyp>
+
+      <!-- Sample of Geospatial Features -->
+      <attr>
+        <attrlabl>Daylight (Dayl)</attrlabl>
+        <attrdef>Daylight hours</attrdef>
+        <attrdefs>Daymet v4</attrdefs>
+        <attrdomv><rdom><rdommin>0</rdommin><rdommax>86.4k</rdommax></rdom></attrdomv>
+      </attr>
+
+    <!-- Daymet v4 Features -->
+      <attr>
+        <attrlabl>Daylight (Dayl)</attrlabl>
+      <attrdef>Daylight hours</attrdef>
+      <attrdefs>Daymet v4</attrdefs>
+      <attrdomv><rdom><rdommin>0</rdommin><rdommax>86.4k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Precipitation (PRCP)</attrlabl>
+      <attrdef>Precipitation in millimeters</attrdef>
+      <attrdefs>Daymet v4</attrdefs>
+      <attrdomv><rdom><rdommin>0</rdommin><rdommax>544</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Solar Radiation (Srad)</attrlabl>
+      <attrdef>Solar Radiation in W/m²</attrdef>
+      <attrdefs>Daymet v4</attrdefs>
+      <attrdomv><rdom><rdommin>0</rdommin><rdommax>1k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Maximum Temperature (Tmax)</attrlabl>
+      <attrdef>Maximum temperature in °C</attrdef>
+      <attrdefs>Daymet v4</attrdefs>
+      <attrdomv><rdom><rdommin>-60</rdommin><rdommax>60</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Minimum Temperature (Tmin)</attrlabl>
+      <attrdef>Minimum temperature in °C</attrdef>
+      <attrdefs>Daymet v4</attrdefs>
+      <attrdomv><rdom><rdommin>-60</rdommin><rdommax>42</rdommax></rdom></attrdomv>
+    </attr>
+
+    <!-- MOD13Q1.061 Features -->
+      <attr>
+        <attrlabl>Normalized Difference Vegetation Index (NDVI)</attrlabl>
+      <attrdef>Normalized Difference Vegetation Index from MODIS.</attrdef>
+      <attrdefs>MOD13Q1</attrdefs>
+      <attrdomv><rdom><rdommin>-2k</rdommin><rdommax>10k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Enhanced Vegetation Index (EVI)</attrlabl>
+      <attrdef>Enhanced Vegetation Index from MODIS.</attrdef>
+      <attrdefs>MOD13Q1</attrdefs>
+      <attrdomv><rdom><rdommin>-2k</rdommin><rdommax>10k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Red Surface Reflectance (Red)</attrlabl>
+      <attrdef>Red surface reflectance from MODIS.</attrdef>
+      <attrdefs>MOD13Q1</attrdefs>
+      <attrdomv><rdom><rdommin>0</rdommin><rdommax>10k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Near-Infrared Surface Reflectance (NIR)</attrlabl>
+      <attrdef>Near-infrared surface reflectance from MODIS.</attrdef>
+      <attrdefs>MOD13Q1</attrdefs>
+      <attrdomv><rdom><rdommin>0</rdommin><rdommax>10k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Blue Surface Reflectance (Blue)</attrlabl>
+      <attrdef>Blue surface reflectance from MODIS.</attrdef>
+      <attrdefs>MOD13Q1</attrdefs>
+      <attrdomv><rdom><rdommin>0</rdommin><rdommax>10k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Mid-Infrared Surface Reflectance (MIR)</attrlabl>
+      <attrdef>Mid-infrared surface reflectance from MODIS.</attrdef>
+      <attrdefs>MOD13Q1</attrdefs>
+      <attrdomv><rdom><rdommin>0</rdommin><rdommax>10k</rdommax></rdom></attrdomv>
+    </attr>
+
+    <!-- MOD11A1.061 Features -->
+      <attr>
+        <attrlabl>Land Surface Temperature-Day (LST_d)</attrlabl>
+      <attrdef>Land surface temperature during the day in Kelvin.</attrdef>
+      <attrdefs>MOD11A1</attrdefs>
+      <attrdomv><rdom><rdommin>7.5k</rdommin><rdommax>65k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Land Surface Temperature-Night (LST_n)</attrlabl>
+      <attrdef>Land surface temperature during the night in Kelvin.</attrdef>
+      <attrdefs>MOD11A1</attrdefs>
+      <attrdomv><rdom><rdommin>7.5k</rdommin><rdommax>65k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Band 31 Emissivity (Emis_31)</attrlabl>
+      <attrdef>Emissivity in Band 31 from MODIS.</attrdef>
+      <attrdefs>MOD11A1</attrdefs>
+      <attrdomv><rdom><rdommin>1</rdommin><rdommax>225</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Band 32 Emissivity (Emis_32)</attrlabl>
+      <attrdef>Emissivity in Band 32 from MODIS.</attrdef>
+      <attrdefs>MOD11A1</attrdefs>
+      <attrdomv><rdom><rdommin>1</rdommin><rdommax>225</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Day Clear-Sky Coverage (Clear_d)</attrlabl>
+      <attrdef>Clear-sky coverage during the day from MODIS.</attrdef>
+      <attrdefs>MOD11A1</attrdefs>
+      <attrdomv><rdom><rdommin>1</rdommin><rdommax>65k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Night Clear-Sky Coverage (Clear_n)</attrlabl>
+      <attrdef>Clear-sky coverage during the night from MODIS.</attrdef>
+      <attrdefs>MOD11A1</attrdefs>
+      <attrdomv><rdom><rdommin>1</rdommin><rdommax>65k</rdommax></rdom></attrdomv>
+    </attr>
+
+    <!-- MCD43A3.061 Features -->
+      <attr>
+        <attrlabl>NIR Black Sky Albedo (BSA_NIR)</attrlabl>
+      <attrdef>NIR black sky albedo from MODIS.</attrdef>
+      <attrdefs>MCD43A3</attrdefs>
+      <attrdomv><rdom><rdommin>0</rdommin><rdommax>32k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Shortwave Broadband Black Sky Albedo (BSA_s)</attrlabl>
+      <attrdef>Shortwave broadband black sky albedo from MODIS.</attrdef>
+      <attrdefs>MCD43A3</attrdefs>
+      <attrdomv><rdom><rdommin>0</rdommin><rdommax>32k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>NIR White Sky Albedo (WSA_NIR)</attrlabl>
+      <attrdef>NIR white sky albedo from MODIS.</attrdef>
+      <attrdefs>MCD43A3</attrdefs>
+      <attrdomv><rdom><rdommin>0</rdommin><rdommax>32k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Shortwave Broadband White Sky Albedo (WSA_s)</attrlabl>
+      <attrdef>Shortwave broadband white sky albedo from MODIS.</attrdef>
+      <attrdefs>MCD43A3</attrdefs>
+      <attrdomv><rdom><rdommin>0</rdommin><rdommax>32k</rdommax></rdom></attrdomv>
+    </attr>
+
+    <!-- MCD12Q1.061 Features -->
+      <attr>
+        <attrlabl>Land Cover IGBP Classification (LC1)</attrlabl>
+      <attrdef>Land Cover classification following IGBP standards from MODIS.</attrdef>
+      <attrdefs>MCD12Q1</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Land Cover UMD Classification (LC2)</attrlabl>
+      <attrdef>Land Cover classification following UMD standards from MODIS.</attrdef>
+      <attrdefs>MCD12Q1</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Land Cover LAI Classification (LC3)</attrlabl>
+      <attrdef>Land Cover classification based on Leaf Area Index from MODIS.</attrdef>
+      <attrdefs>MCD12Q1</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Land Cover BGC Classification (LC4)</attrlabl>
+      <attrdef>Land Cover classification based on Biogeochemical Cycles from MODIS.</attrdef>
+      <attrdefs>MCD12Q1</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Land Cover Plant Functional Types Classification (LC5)</attrlabl>
+      <attrdef>Land Cover classification based on Plant Functional Types from MODIS.</attrdef>
+      <attrdefs>MCD12Q1</attrdefs>
+    </attr>
+
+    <!-- AW3D30 v3.2 Features -->
+      <attr>
+        <attrlabl>Digital Surface Model Elevation (Elev)</attrlabl>
+      <attrdef>Elevation from AW3D30 DSM.</attrdef>
+      <attrdefs>AW3D30 v3.2</attrdefs>
+      <attrdomv><rdom><rdommin>-433</rdommin><rdommax>8.7k</rdommax></rdom></attrdomv>
+    </attr>
+
+      <attr>
+        <attrlabl>Slope</attrlabl>
+      <attrdef>Slope derived from AW3D30 DSM.</attrdef>
+      <attrdefs>AW3D30 v3.2</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Aspect</attrlabl>
+      <attrdef>Aspect derived from AW3D30 DSM.</attrdef>
+      <attrdefs>AW3D30 v3.2</attrdefs>
+    </attr>
+
+    <!-- ERA5-Land Reanalysis Data -->
+      <attr>
+        <attrlabl>Northward Component of 10m Wind (Wind_v)</attrlabl>
+      <attrdef>Northward component of wind at 10 meters above ground in m/s from ERA5-Land.</attrdef>
+      <attrdefs>ERA5-Land</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Eastward Component of 10m Wind (Wind_u)</attrlabl>
+      <attrdef>Eastward component of wind at 10 meters above ground in m/s from ERA5-Land.</attrdef>
+      <attrdefs>ERA5-Land</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Atmosphere Pressure on Surface (Pressure)</attrlabl>
+      <attrdef>Atmosphere pressure at surface level in Pascals from ERA5-Land.</attrdef>
+      <attrdefs>ERA5-Land</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Total Accumulated Runoff (Runoff)</attrlabl>
+      <attrdef>Total accumulated runoff in meters from ERA5-Land.</attrdef>
+      <attrdefs>ERA5-Land</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Total Accumulated Evaporation (Evap)</attrlabl>
+      <attrdef>Total accumulated evaporation in meters from ERA5-Land.</attrdef>
+      <attrdefs>ERA5-Land</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Total Accumulated Snowfall (Snowfall)</attrlabl>
+      <attrdef>Total accumulated snowfall in meters of water equivalent from ERA5-Land.</attrdef>
+      <attrdefs>ERA5-Land</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Total Accumulated Snowmelt (Snowmelt)</attrlabl>
+      <attrdef>Total accumulated snowmelt in meters of water from ERA5-Land.</attrdef>
+      <attrdefs>ERA5-Land</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Instantaneous Snow Thickness (Snow_d)</attrlabl>
+      <attrdef>Instantaneous snow thickness in meters from ERA5-Land.</attrdef>
+      <attrdefs>ERA5-Land</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Instantaneous Snow Density (Snow_de)</attrlabl>
+      <attrdef>Instantaneous snow density in kg/m³ from ERA5-Land.</attrdef>
+      <attrdefs>ERA5-Land</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>Instantaneous Snow Cover (Snow_c)</attrlabl>
+      <attrdef>Instantaneous snow cover in percentage from ERA5-Land.</attrdef>
+      <attrdefs>ERA5-Land</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>2m Dew Point Temperature (Dewpoint)</attrlabl>
+      <attrdef>Dew point temperature at 2 meters above ground in Kelvin from ERA5-Land.</attrdef>
+      <attrdefs>ERA5-Land</attrdefs>
+    </attr>
+
+      <attr>
+        <attrlabl>2m Air Temperature (Temp)</attrlabl>
+      <attrdef>Air temperature at 2 meters above ground in Kelvin from ERA5-Land.</attrdef>
+      <attrdefs>ERA5-Land</attrdefs>
+    </attr>
+
+    <!-- Geography and Time-Related Features -->
+      <attr>
+        <attrlabl>Latitude (Lat)</attrlabl>
+      <attrdef>Latitude in degrees</attrdef>
+    </attr>
+
+      <attr>
+        <attrlabl>Longitude (Lon)</attrlabl>
+      <attrdef>Longitude in degrees</attrdef>
+    </attr>
+
+      <attr>
+        <attrlabl>Year (Y)</attrlabl>
+      <attrdef>Year of the observation</attrdef>
+    </attr>
+
+      <attr>
+        <attrlabl>Month (M)</attrlabl>
+      <attrdef>Month of the observation</attrdef>
+    </attr>
+
+      <attr>
+        <attrlabl>Day of Month (D)</attrlabl>
+      <attrdef>Day of the month of the observation</attrdef>
+    </attr>
+
+      <attr>
+        <attrlabl>Astronomical Season (S)</attrlabl>
+      <attrdef>Astronomical season (0: Winter, 1: Spring, 2: Summer, 3: Fall)</attrdef>
+    </attr>
+
+      <attr>
+        <attrlabl>Is Weekend (W)</attrlabl>
+      <attrdef>Binary indicator if the day is a weekend (0: No, 1: Yes)</attrdef>
+    </attr>
+
+      <attr>
+        <attrlabl>Is Holiday (H)</attrlabl>
+      <attrdef>Binary indicator if the day is a holiday (0: No, 1: Yes)</attrdef>
+    </attr>
+
+    </detailed>
+  </eainfo>
+
+  <!-- Distribution Information -->
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntperp>
+          <cntper>Aymane Ahajjam</cntper>
+          <cntorg>University of North Dakota</cntorg>
+        </cntperp>
+        <cntaddr>
+          <addrtype>Mailing Address</addrtype>
+          <address>University of North Dakota</address>
+          <city>Grand Forks</city>
+          <state>ND</state>
+          <postal>58202</postal>
+        </cntaddr>
+        <cntvoice>(701) 777-2180</cntvoice>
+        <cntemail>mohamed.ahajjam@und.edu</cntemail>
+      </cntinfo>
+    </distrib>
+    <resdesc>Digital data and report are available through the GitHub repository linked in the citation section.</resdesc>
+    <distliab>University of North Dakota holds no liability for improper use of the data provided.</distliab>
+  </distinfo>
+
+</metadata>
