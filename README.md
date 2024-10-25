@@ -1,6 +1,6 @@
 # Wildfires
 This repository contains the data, code, and metadata for the research paper titled **"Alaska Wildfire Prediction using Geospatial Features and Machine Learning."** This project aims to enhance the accuracy of wildfire occurrence and behavior prediction models by leveraging NASA's FIRMS dataset (for historical wildfire events) and both temporal and geospatial data (+50 features). The proposed framework integrates machine learning algorithms and feature selection techniques to improve wildfire management and response efforts.
-![The proposed framework for Wildfire occurrence and behavior prediction in Alaska](Cenceptual_Diagram_Fires.jpg "The proposed framework for Wildfire occurrence and behavior prediction in Alaska")
+![The proposed framework for Wildfire occurrence and behavior prediction in Alaska](Cenceptual_Diagram_FiresV2.jpg "The proposed framework for Wildfire occurrence and behavior prediction in Alaska")
 
 ## Repository Structure
 - `Data/` - Contains the datasets used in the study as well as the proposed model predictions, including:
